@@ -26,3 +26,23 @@ typeof(a) // number
   }
 }
 console.log(a) // a is not defined
+
+
+//hoisting
+console.log(a)
+var a = 1
+// is equal to
+var a
+console.log(a) // undefined
+a = 1
+
+//IIFE
+(function() {
+  var thing = {'hello':'julie'}
+  console.log(thing)
+})() 
+
+(function(){
+  var a = 3
+})()
+console.log("a defined? " + (typeof a !== 'undefined')) // a defined false
