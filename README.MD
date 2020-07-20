@@ -90,3 +90,66 @@ typeof(a) // number
 ** What’s the difference between == and ===?
 - Equality `==` only checks values
 - Strict Equality `===` checks both values and types
+
+## Scopes&Variables 
+
+** What is a scope?
+- The lifetime of a variable. where that variable is visible and available for us to use in the code
+
+** What are the different scopes in JavaScript?
+- Global scpoe
+- Functional/local scope
+- Block level scope - use let or const
+```
+{
+  let a = 'block'
+  {
+    console.log(a) // block
+  }
+}
+console.log(a) // a is not defined
+```
+** What is variable hoisting?
+- Automatic hoisting of the variable declaration to the top of its enclosing scope
+- Functions and variables are hoisted to the top of the page
+```
+console.log(a)
+var a = 1
+// is equal to
+var a
+console.log(a) // undefined
+a = 1
+```
+** What is the scope chain?
+- The scope chain is defined by how the code is physically written on the page v.s. how the functions are called
+- When looking for a varible, it looks inside its inner scope(eg. a functional scope) and then the outer scope and the outer until it finds the variable
+- The variables are resolved in the order in which the code is written
+
+** What is an IIFE?
+- Immediately Invoked Funtion Expression
+```
+(function() {
+  var thing = {'hello':'julie'}
+  console.log(thing)
+})() // wrap an anonymous function with() and use() to execute it immediately  
+// this way we prevent the global variables declared inside any of the js files from leaking out into our application global scope
+```
+```
+(function(){
+  var a = 3
+})()
+console.log("a defined? " + (typeof a !== 'undefined')) // a defined false
+```
+
+** What are function closures?
+- Closures can refer to variables in outer scopes
+- Can refer to those variables in outer funtions even after those functions have returned
+```
+var foo = []
+for (var i = 0; i < 10; i++) {
+    foo[i] = function() { return i }
+}
+console.log(foo[0]()) // 10 when we call foo[0]() here this loop has been exhausted and i is then 10
+console.log(foo[1]()) // 10
+```
+- The closure only point to the current value of outer scope vaiables rather the value of the time the closure was created
