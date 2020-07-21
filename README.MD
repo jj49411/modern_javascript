@@ -206,4 +206,64 @@ for (let value of array) {
   console.log(typeof(value)) // number
 }
 ```
+## This
+
+** What does 'this' mean?
+- This is determined by the calling context/by the way in which a function is called
+- It points to the global window object by default
+- But calling within an object, it refers to the object itself
+```
+var jul = {
+  checkThis: function() {
+    var self = this // solution for assigning this to self, so we lock down a variable
+    console.log(self) // Object{}
+    
+    function checkOther() {
+      console.log(this) // window object{}
+    }
+  }
+}
+```
+
+** What do the functions call, bind and apply do?
+Stabilising the value of this
+- Functions are in fact objects which have the call, bind and apply functions
+- Call function
+```
+"use stict"
+function hello() {
+  console.log(this) // 'this' is whatever we pass in as parameter on the call function
+}
+hello.call({}) // Object{}
+
+function a(b, c, d) {
+  console.log(this) // the first parameter to the call function is whatever we want 'this' to be
+  console.log(b)
+  console.log(c)
+  console.log(d)
+}
+a.call(1, 2, 3, 4) // 1 2 3 4
+
+```
+- Apply function // use when we want to call a function that takes a variable number of parameters
+```
+- continue with the code above -
+a.apply(1, [2, 3, 4]) // 1 2 3 4
+```
+- Bind function // at the time we define a function we can lock down what we want this to be
+  to bind something directly to the function object that's created
+```
+var a = function() {
+  console.log(this)
+}.bind(1) // we bind this to 1
+a() // 1 
+```
+
+** What is a fat arror function?
+- An easier way of writing functions but also stabilising this keyword
+```
+setTimeout(() => {
+  console.log('setTimeout called')
+}, 1000)
+```
 
