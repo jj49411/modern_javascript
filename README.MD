@@ -153,3 +153,57 @@ console.log(foo[0]()) // 10 when we call foo[0]() here this loop has been exhaus
 console.log(foo[1]()) // 10
 ```
 - The closure only point to the current value of outer scope vaiables rather the value of the time the closure was created
+
+## Destrcturing&Looping
+
+** What is destrcturing?
+- A way of extracting values into variables from data stored in objects or arrays
+- Keep destructuring at a minimum, keep it only at one level so it won't be too confusing for others who read the code
+```
+const obj = {first: 'Julie', last: 'C'}
+const {first: Yay, last} = obj
+console.log(Yay) // Julie
+console.log(last) // C
+// so we don't need to declare another variable lile const Yay = obj.first
+```
+- Function parameter destructuring
+```
+function f({x=0}) { // set x to default value 0
+  console.log(x)
+}
+f({x:4}) // 4
+f({}) // 0
+```
+** What are the different ways you can loop with 'for'?
+1. Standard for loop
+```
+var array = [1, 3, 5]
+for (let i= 0; i<array.length; i++) {
+  console.log(array[i]) // 1 3 5
+  // we can use continue, break or return in the for loop
+}
+```
+2. ForEach // cannot use continue, break
+```
+var array = [1, 3, 5]
+array.forEach(function(value) {
+  console.log(value) // 1 3 5
+})
+```
+3. For-in // looping over the properties of objects
+```
+var obj = {a:1, b:2}
+for (let prop in obj) {
+  console.log(prop) // a b
+  console.log(typeof(prop)) // string. it's expacting strings
+}
+```
+4. For-of // looping over arrays
+```
+var array = [1, 3, 5]
+for (let value of array) {
+  console.log(value) // 1 3 5
+  console.log(typeof(value)) // number
+}
+```
+
