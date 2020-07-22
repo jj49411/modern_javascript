@@ -251,7 +251,8 @@ a.call(1, 2, 3, 4) // 1 2 3 4
 a.apply(1, [2, 3, 4]) // 1 2 3 4
 ```
 - Bind function // at the time we define a function we can lock down what we want this to be
-  to bind something directly to the function object that's created
+// to bind something directly to the function object that's created
+// bind can only be used on functions after they have been created and assigned to a variable
 ```
 var a = function() {
   console.log(this)
@@ -266,4 +267,19 @@ setTimeout(() => {
   console.log('setTimeout called')
 }, 1000)
 ```
+## Object Orientation
+
+** What is the prototype chain?
+- The objects in JavaScript are linked to others in a prototype chain. JavaScript tracks the chain when looking for a property and only returns undefined if it can't find the properties from all the objects in the chain
+```
+var animal = {
+  kind: 'human'
+}
+var jul = {}
+jul.__proto__ = animal // link the object jul to the object animal
+
+var human = Object.create(animal) // to create an object and assign a prototype to it
+var cat = Object.create(animal, {food: {value: "fish"}} ) // can also pass an object to the second parameter to add a default property. passing in an object that describes the property, not to use as the properties
+```
+
 
