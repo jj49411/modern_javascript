@@ -282,4 +282,59 @@ var human = Object.create(animal) // to create an object and assign a prototype 
 var cat = Object.create(animal, {food: {value: "fish"}} ) // can also pass an object to the second parameter to add a default property. passing in an object that describes the property, not to use as the properties
 ```
 
+** What is the Constructor OO pattern?
+```
+// call an instance on Person constructor
+var dude = new Person('fist', 'last')
+```
+- Objects have a `__proto__` property/ Functions have a `prototype` property that points to an object `{}` which has a constructor property that points to Person itself and a `__proto__` property that points to another object and another object
+- When we create multiple instances, they all share the same prototype and the function we added on prototype
+
+```
+function Person(first_name, last_name) {
+  this.first_name = first_name
+  this.last_name = last_name
+}
+Person.prototype.full_name_prototype => {
+  return this.first_name + this.last_name
+}
+```
+```
+Professional.prototype = Object.create(Person.prototype)
+```
+- Replace the existing prototype object on the professional function with `Object.create`.
+- `Object.create(Person.prototype)` creates an object whose `__proto__` points to the object passed in as the first parameter
+
+** How do you do object orientation on ES6/how do you use the class and extends keywords?
+- A **class** is a blueprint/instruction for creating an object
+```
+class Person{
+  constructor(firstName, lastName) {
+    this._firstName =  firstName
+    this._lastName = lastName
+  }
+  fullName() {
+    return `${this._firstName} ${this._lastName}`
+  }
+  whoAreYou() {
+    return `Hi i'm ${this.fullName()}`
+  }
+}
+let julie = new Person('julie', 'c')
+```
+- Inheritance: `extends` is used when creating a new blueprint which contains everything that the existing blueprint has plus other features/functionality
+```
+class Student extends Person {
+  constructor(firstName, lastName, course) {
+    super(firstName, lastName) // super calls the constructor of Person
+    this.course = course
+  }
+  hello() {
+    return `${super.whoAreYou()} and i'm studying ${this.course}` // use super to call whoAreYou() of Person class
+  }
+}
+let julie = new Student('julie', 'c', 'javascript')
+```
+
+
 
